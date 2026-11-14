@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+.ipynb_checkpoints/
+
+# Données (seul data/sample/ est versionné)
+data/raw/
+data/processed/
+
+# Éditeur / OS
+.vscode/
+.DS_Store
