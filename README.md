@@ -9,7 +9,7 @@ pip install -r requirements.txt
 ```
 
 ## Fonctionnalités
-
+- csv-import : lecture d'un CSV en DataFrame (samrous6213 - Sara Amrous )
 <!-- une ligne par fonctionnalité : nom, auteur -->
 
 ## Données
