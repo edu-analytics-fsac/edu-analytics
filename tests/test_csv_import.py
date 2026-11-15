@@ -34,3 +34,12 @@ def test_empty_csv_raises(tmp_path):
     
     with pytest.raises(ValueError):
         load_students_csv(empty_file)
+
+def test_missing_expected_column_raises(tmp_path):
+    """Vérifie qu'une erreur est levée si une colonne attendue manque."""
+    bad_file = tmp_path / "bad.csv"
+    # On crée un CSV auquel il manque la colonne 'grade'
+    bad_file.write_text("student_id,course\nMAT001,Mathematics\n")
+    
+    with pytest.raises(ValueError, match="Colonnes manquantes"):
+        load_students_csv(bad_file)
