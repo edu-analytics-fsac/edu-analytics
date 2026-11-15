@@ -77,3 +77,7 @@ def test_ranking_table_is_sorted_and_drops_missing():
     table = ranking_table(pd.Series({"A": 10.0, "B": 18.0, "C": None, "D": 18.0}))
     assert table["student_id"].tolist() == ["B", "D", "A"]
     assert table["rank"].tolist() == [1, 1, 3]
+
+def test_single_student():
+    result = rank_students(pd.Series({"A": 14.0}))
+    assert result.to_dict() == {"A": 1}
