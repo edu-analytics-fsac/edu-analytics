@@ -1,6 +1,7 @@
 """Calcul des moyennes de notes par étudiant et par matière."""
 import pandas as pd
 
+DECIMALS = 2  # nombre de décimales des moyennes
 
 def _average_by(df: pd.DataFrame, key: str) -> pd.Series:
     """Moyenne de la colonne 'grade' regroupée par la colonne 'key'.
@@ -21,7 +22,7 @@ def _average_by(df: pd.DataFrame, key: str) -> pd.Series:
 
     keys = df[key].astype("string").str.strip()
     keys = keys.mask(keys == "")  # clés vides ignorées
-    result = grades.groupby(keys).mean().round(2)
+    result = grades.groupby(keys).mean().round(DECIMALS)
     result.name = "average"
     return result
 
