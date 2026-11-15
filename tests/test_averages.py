@@ -4,7 +4,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from averages import course_averages, student_averages
+from averages import DECIMALS, course_averages, student_averages
 from csv_import import load_students_csv
 
 SAMPLE = Path(__file__).resolve().parents[1] / "data" / "sample" / "students.csv"
@@ -24,7 +24,7 @@ def test_real_dataset_course_averages():
     result = course_averages(df)
 
     valid = df[pd.to_numeric(df["grade"], errors="coerce").between(0, 20)]
-    expected = valid.groupby(valid["course"].str.strip())["grade"].mean().round(2)
+    expected = valid.groupby(valid["course"].str.strip())["grade"].mean().round(DECIMALS)
 
     assert not result.empty
     assert result.between(0, 20).all()
