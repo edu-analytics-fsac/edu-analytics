@@ -199,3 +199,17 @@ def test_dirty_dataframe():
     assert report["total_rows"] == 3
     assert report["total_missing_values"] == 1
     assert report["duplicate_rows"] == 1
+    
+def test_dataframe_without_columns():
+    """Vérifie un DataFrame sans lignes ni colonnes."""
+    df = pd.DataFrame()
+
+    report = check_data_quality(df)
+
+    assert report["total_rows"] == 0
+    assert report["no_columns"] is True
+    assert report["missing_columns"] == [
+        "student_id", "course", "grade"
+    ]
+    assert report["missing_values"] == {}
+    assert report["duplicate_rows"] == 0

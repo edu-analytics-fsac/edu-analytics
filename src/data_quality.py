@@ -138,6 +138,7 @@ def check_data_quality(df: pd.DataFrame) -> dict:
         "invalid_studytime": invalid_studytime,
         "invalid_absences": invalid_absences,
         "invalid_sex": invalid_sex,
+        "no_columns": df.shape[1] == 0,
     }
 def main():
     """Charge le dataset et affiche le rapport de qualité."""
