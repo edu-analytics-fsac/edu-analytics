@@ -13,6 +13,7 @@ pip install -r requirements.txt
 - data-quality : valeurs manquantes et doublons (Yassine-Baroudi)
 - averages : moyennes par étudiant et par matière, arrondies à 2 décimales (badr-abba)
 - ranking : classement des étudiants par moyenne, ex aequo gérés (RedaAgouzoul)
+- distribution-stats : moyenne, médiane, écart-type, quartiles (Simo069)
 <!-- une ligne par fonctionnalité : nom, auteur -->
 
 ## Données
