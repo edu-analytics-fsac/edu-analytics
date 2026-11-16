@@ -28,9 +28,6 @@ def distribution_stats(
         raise TypeError("Un DataFrame ou une Series pandas est attendu.")
 
     if isinstance(data, pd.DataFrame):
-        if data.empty:
-            raise ValueError("Le DataFrame est vide.")
-
         target_col = column
         if target_col not in data.columns:
             if "note" in data.columns and target_col == "grade":
@@ -41,14 +38,17 @@ def distribution_stats(
                 raise ValueError(f"Colonne '{column}' introuvable dans le DataFrame.")
 
         serie = data[target_col]
+        if serie.empty:
+            raise ValueError(f"La colonne '{target_col}' est vide.")
     else:
         if data.empty:
             raise ValueError("La Series est vide.")
         serie = data
+        target_col = "grade"
 
     grades = pd.to_numeric(serie, errors="coerce").dropna()
     if grades.empty:
-        raise ValueError("Aucune note valide trouvée.")
+        raise ValueError(f"La colonne '{target_col}' est vide ou ne contient aucune note valide.")
 
     std_val = 0.0 if len(grades) <= 1 or pd.isna(grades.std()) else float(grades.std())
 
