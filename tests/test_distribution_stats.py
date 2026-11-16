@@ -77,3 +77,22 @@ def test_distribution_stats_missing_column_raises():
     df = pd.DataFrame({"autre_colonne": [10, 12]})
     with pytest.raises(ValueError):
         distribution_stats(df, column="inconnue")
+
+
+def test_distribution_stats_empty_grade_column():
+    """Vérifie qu'une colonne grade vide ou sans valeurs valides lève une ValueError."""
+    # DataFrame avec lignes mais colonne grade vide (que des None / NaN)
+    df_none = pd.DataFrame({"student_id": ["S01", "S02"], "grade": [None, None]})
+    with pytest.raises(ValueError, match="vide|valide"):
+        distribution_stats(df_none)
+
+    # DataFrame avec colonne grade vide (0 lignes)
+    df_empty_col = pd.DataFrame({"grade": []})
+    with pytest.raises(ValueError, match="vide|valide"):
+        distribution_stats(df_empty_col)
+
+    # DataFrame avec colonne grade de valeurs non numériques uniquement
+    df_invalid = pd.DataFrame({"grade": ["absent", "non noté"]})
+    with pytest.raises(ValueError, match="vide|valide"):
+        distribution_stats(df_invalid)
+
