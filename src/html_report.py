@@ -59,11 +59,11 @@ def _render_distribution(stats: dict) -> str:
     }
     table_rows = "".join(
         (
-            f"<tr><th>{escape(labels[key])}</th>"
+            f"<tr><th>{escape(labels.get(key, key))}</th>"
             f"<td>{value:.2f}</td></tr>"
             if isinstance(value, float)
             else (
-                f"<tr><th>{escape(labels[key])}</th>"
+                f"<tr><th>{escape(labels.get(key, key))}</th>"
                 f"<td>{escape(str(value))}</td></tr>"
             )
         )
@@ -74,7 +74,13 @@ def _render_distribution(stats: dict) -> str:
 
 def _render_table(df: pd.DataFrame, index: bool = False) -> str:
     """Convertit un DataFrame en tableau HTML sûr et lisible."""
-    return df.to_html(index=index, border=0, classes="data-table", na_rep="-")
+    return df.to_html(
+        index=index,
+        border=0,
+        classes="data-table",
+        na_rep="-",
+        escape=True,
+    )
 
 
 def generate_html_report(csv_path: str | Path) -> str:
