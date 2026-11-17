@@ -42,3 +42,21 @@ def test_invalid_grades_are_excluded_from_report_statistics(tmp_path):
     assert "Notes invalides</th><td>2" in html
     assert "10.00" in html
     assert "17.50" not in html
+
+
+def test_dynamic_html_values_are_escaped(tmp_path):
+    csv_path = tmp_path / "students & test.csv"
+    pd.DataFrame({
+        "student_id": ["<script>alert('x')</script>"],
+        "course": ['Math & "Sciences"'],
+        "grade": [15],
+    }).to_csv(csv_path, index=False)
+
+    html = generate_html_report(csv_path)
+
+    assert "<script>" not in html
+    assert 'Math & "Sciences"' not in html
+    assert 'Math &amp; "Sciences"' in html
+    assert "alert('x')" in html
+    assert "&lt;script&gt;" in html
+    assert "students &amp; test.csv" in html
