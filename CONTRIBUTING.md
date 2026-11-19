@@ -5,8 +5,8 @@
 | Rôle | Membre |
 |------|--------|
 | Release Manager | ABBA Badreddine |
-| Intégrateur·rice | à définir |
-| Documentaliste | à définir |
+| Intégrateur | BAROUDI Yassine |
+| Documentaliste | AMROUS Sara |
 | Développeur·se | tous |
 
 ## Branches

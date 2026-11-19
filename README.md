@@ -5,7 +5,29 @@ Analyse des résultats étudiants : import CSV, qualité des données, moyennes,
 ## Installation
 
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
+```
+
+## Utilisation
+
+Lancer les tests :
+
+```bash
+pytest
+```
+
+Analyser la qualité du jeu d'exemple :
+
+```bash
+python src/data_quality.py
+```
+
+Générer un rapport HTML :
+
+```bash
+PYTHONPATH=src python -c "from html_report import generate_html_report; open('rapport.html', 'w', encoding='utf-8').write(generate_html_report('data/sample/students.csv'))"
 ```
 
 ## Fonctionnalités
@@ -20,4 +42,6 @@ pip install -r requirements.txt
 
 ## Données
 
-Les jeux de données ne sont pas versionnés. Un petit échantillon est dans `data/sample/`. Jeu complet : à compléter.
+Les jeux de données complets ne sont pas versionnés. Un échantillon destiné aux tests est disponible dans `data/sample/students.csv`.
+
+Le fichier CSV attendu contient au minimum les colonnes `student_id`, `course` et `grade`.
